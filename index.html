@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <!-- we import arjs version without NFT but with marker + location based support -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+
+    <script>
+        // AFRAME.registerComponent("markerhandler", {
+        //   init: function () {
+        //     this.el.sceneEl.addEventListener("markerFound", () => {
+        //       // redirect to custom URL
+        //       window.location = "https://github.com/AR-js-org/AR.js";
+        //     });
+        //   },
+        // });
+        window.onload = () => {
+            document.getElementById("anchor").addEventListener("markerFound", (e) => {
+                document.getElementById("ballNumber").innerText = e.currentTarget.getAttribute("ball");
+                document.getElementById("foundToast").classList.add("visible");
+
+                setTimeout(() => {
+                    document.getElementById("foundToast").classList.remove("visible");
+                }, 5000);
+            });
+        };
+    </script>
+
+    <style>
+        #foundToast {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: lightgreen;
+            transform: translateY(-100%);
+            transition: transform ease-in-out 0.5s;
+        }
+        #foundToast.visible {
+            transform: translateY(0%);
+        }
+        #foundToast span {
+            font-weight: bold;
+            margin-left: 4px;
+        }
+    </style>
+    <body style="margin: 0px; overflow: hidden">
+        <div id="foundToast">Awesome! You found the ball number <span id="ballNumber"></span></div>
+        <a-scene embedded arjs>
+            <a-marker id="anchor" ball="1" preset="hiro">
+                <a-entity
+                    position="0 0 0"
+                    scale="0.05 0.05 0.05"
+                    gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+                ></a-entity>
+            </a-marker>
+            <a-entity camera></a-entity>
+        </a-scene>
+    </body>
+</html>
