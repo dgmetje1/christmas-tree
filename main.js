@@ -1,6 +1,7 @@
 window.onload = () => {
     const sceneEl = document.getElementById("scene");
     let currentEl = null;
+    const ballElements = document.querySelectorAll("[id^=anchor]")
 
 //Methods
 
@@ -26,9 +27,11 @@ window.onload = () => {
     const checkIfActivityCompleted = ()=>{
       const isActivityCompleted = Array.from({length: 6}, (_, i) => `ball-${i + 1}`).every(value => localStorage.getItem(value));
       if(isActivityCompleted){
-
-      }else{
-
+        document.getElementById('tree').setAttribute('visible',"true");
+    }else{
+          document.getElementById('tree').setAttribute('visible',"false");
+          ballElements.forEach(el =>{el.setAttribute('visible',false)});
+        //TODO Show a toast indicating that now the tree is visible
       }
     }
 
@@ -37,14 +40,10 @@ window.onload = () => {
     sceneEl.addEventListener("onefingermove", handleRotation);
     sceneEl.addEventListener("twofingermove", handleScale);
 
-    const ballElements = document.querySelectorAll("[id^=anchor]")
-    console.log(ballElements)
     ballElements.forEach(el =>{
-        console.log(el);
         el.addEventListener("markerFound", (e) => {
             currentEl = e.currentTarget;
             const ballNumber = e.currentTarget.getAttribute("ball");
-            console.log(ballNumber)
             document.getElementById("ballNumber").innerText = ballNumber;
             localStorage.setItem(`ball-${ballNumber}`, true);
             checkIfActivityCompleted();
