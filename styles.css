@@ -125,8 +125,13 @@ table {
 * {
     box-sizing: border-box;
 }
+body {
+    font-family: Helvetica, sans-serif;
+}
 
-#foundToast {
+#foundToast,
+#foundTreeToast,
+#foundedToast {
     position: fixed;
     top: 0;
     left: 0;
@@ -139,10 +144,57 @@ table {
     transform: translateY(-100%);
     transition: transform ease-in-out 0.5s;
 }
-#foundToast.visible {
+
+#foundToast.visible,
+#foundedToast.visible,
+#foundTreeToast.visible {
+    transform: translateY(0%);
+}
+#foundTreeToast {
+    font-size: 20px;
+    font-weight: bold;
+}
+#errorToast {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightcoral;
+    color: #fff;
+    padding: 0 8px;
+    transform: translateY(-100%);
+    transition: transform ease-in-out 0.5s;
+}
+
+#errorToast.visible {
     transform: translateY(0%);
 }
 #foundToast span {
     font-weight: bold;
     margin-left: 4px;
+}
+#bag {
+    position: fixed;
+    bottom: 8px;
+    left: 8px;
+    color: #fff;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 3px 3px rgba(0, 0, 0, 0.7);
+}
+#bag img {
+    -webkit-filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
+    filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
+    width: 25px;
+    margin-right: 4px;
+}
+#bag span {
+    margin-left: 4px;
+    font-weight: bold;
 }

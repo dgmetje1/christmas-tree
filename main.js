@@ -1,9 +1,11 @@
 window.onload = () => {
+    const reactVersion = "react-v16.4";
     const sceneEl = document.getElementById("scene");
     let currentEl = null;
-    const ballElements = document.querySelectorAll("[id^=anchor]")
+    const ballElements = document.querySelectorAll("[id^=anchor]");
+    const treeEl = document.getElementById("tree");
 
-//Methods
+    //Methods
 
     const handleRotation = (e) => {
         if (currentEl) {
@@ -24,44 +26,107 @@ window.onload = () => {
         }
     };
 
-    const checkIfActivityCompleted = ()=>{
-      const isActivityCompleted = Array.from({length: 6}, (_, i) => `ball-${i + 1}`).every(value => localStorage.getItem(value));
-      if(isActivityCompleted){
-        document.getElementById('tree').setAttribute('visible',"true");
-    }else{
-          document.getElementById('tree').setAttribute('visible',"false");
-          ballElements.forEach(el =>{el.setAttribute('visible',false)});
-        //TODO Show a toast indicating that now the tree is visible
-      }
-    }
+    const checkIfActivityCompleted = () => {
+        const NUMBER_OF_BALLS = 9;
+        const ballsFound = Array.from({ length: NUMBER_OF_BALLS }, (_, i) => `ball-${i + 1}`).filter((value) => localStorage.getItem(value));
+        const remainingBalls = NUMBER_OF_BALLS - ballsFound.length;
+        document.getElementById("remainingNumber").innerText = remainingBalls;
+        if (remainingBalls !== 0) localStorage.removeItem("version");
+        return remainingBalls === 0;
+    };
+
+    const treeMarkerFoundHandler = (e) => {
+        showErrorToast();
+    };
+
+    const antiCheatingHandler = (e) => {
+        alert("Don't try to cheat...Now you have to restart again!");
+        treeEl.innerHTML = "";
+        localStorage.clear();
+        checkIfActivityCompleted();
+        treeEl.addEventListener("markerFound", treeMarkerFoundHandler);
+        treeEl.removeEventListener("markerFound", antiCheatingHandler);
+    };
 
     //Register events
 
     sceneEl.addEventListener("onefingermove", handleRotation);
     sceneEl.addEventListener("twofingermove", handleScale);
+    treeEl.addEventListener("markerFound", treeMarkerFoundHandler);
 
-    ballElements.forEach(el =>{
+    const unhideTree = () => {
+        setTimeout(() => {
+            document.getElementById("foundToast").classList.remove("visible");
+            document.getElementById("foundedToast").classList.add("visible");
+        }, 500);
+
+        if (localStorage.getItem("version") === reactVersion) {
+            treeEl.removeEventListener("markerFound", treeMarkerFoundHandler);
+            treeEl.addEventListener("markerFound", (e) => {
+                document.getElementById("foundedToast").classList.remove("visible");
+                document.getElementById("foundTreeToast").classList.add("visible");
+            });
+            treeEl.innerHTML = `<a-entity
+                position="0 0 0"
+                scale="2 2 2"
+                rotation="0 0 0"
+                gltf-model="assets/christmas_tree.gltf"
+                class="clickable"
+                gesture-handler
+                ></a-entity>`;
+        } else {
+            treeEl.removeEventListener("markerFound", treeMarkerFoundHandler);
+            treeEl.addEventListener("markerFound", antiCheatingHandler);
+        }
+    };
+
+    const includeVerification = () => {
+        localStorage.setItem("version", reactVersion);
+    };
+
+    ballElements.forEach((el) => {
         el.addEventListener("markerFound", (e) => {
             currentEl = e.currentTarget;
             const ballNumber = e.currentTarget.getAttribute("ball");
-            document.getElementById("ballNumber").innerText = ballNumber;
-            localStorage.setItem(`ball-${ballNumber}`, true);
-            checkIfActivityCompleted();
-            showToast();
-        })
+            if (!localStorage.getItem(`ball-${ballNumber}`)) {
+                document.getElementById("ballNumber").innerText = ballNumber;
+                localStorage.setItem(`ball-${ballNumber}`, true);
+                showFoundToast();
+
+                const isActivityCompleted = checkIfActivityCompleted();
+                if (isActivityCompleted) {
+                    includeVerification();
+                    unhideTree();
+                }
+            }
+        });
+        el.addEventListener("markerLost", (e) => {
+            currentEl = null;
+        });
     });
 
-    document.getElementById("anchor").addEventListener("markerLost", (e) => {
-        currentEl = null;
-    });
-
-    checkIfActivityCompleted();
+    //Initial checking
+    const isActivityCompleted = checkIfActivityCompleted();
+    if (isActivityCompleted) {
+        window.addEventListener("arjs-video-loaded", () => {
+            unhideTree();
+        });
+    }
 };
 
-const showToast = () => {
+//Aux functions
+const showFoundToast = () => {
     document.getElementById("foundToast").classList.add("visible");
 
     setTimeout(() => {
         document.getElementById("foundToast").classList.remove("visible");
+    }, 5000);
+};
+
+const showErrorToast = () => {
+    document.getElementById("errorToast").classList.add("visible");
+
+    setTimeout(() => {
+        document.getElementById("errorToast").classList.remove("visible");
     }, 5000);
 };

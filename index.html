@@ -10,52 +10,57 @@
     </head>
     <body style="margin: 0px; overflow: hidden">
         <div id="foundToast">Awesome! You found the ball number <span id="ballNumber"></span></div>
+        <div id="foundedToast">Now you will be able to see the tree. Go try it!</div>
+        <div id="foundTreeToast">Nice job! You completed the game!!!</div>
+        <div id="errorToast">You have to find the balls first to be able to see the tree</div>
+        <div id="bag"><img src="assets/christmas-ball.svg" alt="remaining balls">:<span id="remainingNumber"></span></div>
         <a-scene
             id="scene"
             embedded
-            arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+            arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960;"
             vr-mode-ui="enabled: false"
             gesture-detector
         >
-            <a-marker id="anchor1" ball="1" preset="custom" type="pattern" url="assets/patterns/pattern-cornerjob-logo-1.patt">
+            <a-marker id="anchor1" ball="1" preset="custom" type="pattern" url="assets/patterns/pattern-bolas.patt">
                 <a-sphere src="assets/ball-texture.jpg" rotation="0 0 90" width="1"></a-sphere>
             </a-marker>
-            <a-marker id="anchor2" ball="2" preset="custom" type="pattern" url="assets/patterns/pattern-cornerjob-logo-2.patt">
+            <a-marker id="anchor2" ball="2" preset="custom" type="pattern" url="assets/patterns/pattern-calcetin.patt">
                 <a-sphere src="assets/ball-texture.jpg" rotation="0 0 90" width="1"></a-sphere>
             </a-marker>
-            <a-marker id="anchor3" ball="3" preset="custom" type="pattern" url="assets/patterns/pattern-cornerjob-logo-3.patt">
+            <a-marker id="anchor3" ball="3" preset="custom" type="pattern" url="assets/patterns/pattern-campana.patt">
                 <a-sphere src="assets/ball-texture.jpg" rotation="0 0 90" width="1"></a-sphere>
             </a-marker>
-            <a-marker id="anchor4" ball="4" preset="custom" type="pattern" url="assets/patterns/pattern-cornerjob-logo-4.patt">
+            <a-marker id="anchor4" ball="4" preset="custom" type="pattern" url="assets/patterns/pattern-caramelo.patt">
                 <a-sphere src="assets/ball-texture.jpg" rotation="0 0 90" width="1"></a-sphere>
             </a-marker>
-            <a-marker id="anchor5" ball="5" preset="custom" type="pattern" url="assets/patterns/pattern-cornerjob-logo-5.patt">
+            <a-marker id="anchor5" ball="5" preset="custom" type="pattern" url="assets/patterns/pattern-estrella.patt">
                 <a-sphere src="assets/ball-texture.jpg" rotation="0 0 90" width="1"></a-sphere>
             </a-marker>
-            <a-marker id="anchor6" ball="6" preset="custom" type="pattern" url="assets/patterns/pattern-cornerjob-logo-6.patt">
+            <a-marker id="anchor6" ball="6" preset="custom" type="pattern" url="assets/patterns/pattern-galleta.patt">
+                <a-sphere src="assets/ball-texture.jpg" rotation="0 0 90" width="1"></a-sphere>
+            </a-marker>
+            <a-marker id="anchor7" ball="7" preset="custom" type="pattern" url="assets/patterns/pattern-papanoel.patt">
+                <a-sphere src="assets/ball-texture.jpg" rotation="0 0 90" width="1"></a-sphere>
+            </a-marker>
+            <a-marker id="anchor8" ball="8" preset="custom" type="pattern" url="assets/patterns/pattern-reno.patt">
+                <a-sphere src="assets/ball-texture.jpg" rotation="0 0 90" width="1"></a-sphere>
+            </a-marker>
+            <a-marker id="anchor9" ball="9" preset="custom" type="pattern" url="assets/patterns/pattern-trineo.patt">
                 <a-sphere src="assets/ball-texture.jpg" rotation="0 0 90" width="1"></a-sphere>
             </a-marker>
             <a-marker
                 id="tree"
                 preset="custom"
                 type="pattern"
-                url="assets/patterns/pattern-logo-eurofirms-bn.patt"
+                url="assets/patterns/pattern-arbol.patt"
                 raycaster="objects: .clickable"
                 emitevents="true"
                 cursor="fuse: false; rayOrigin: mouse;"
                 visible="false"
             >
-                <a-entity
-                    position="0 0 0"
-                    scale="2 2 2"
-                    rotation="0 0 0"
-                    gltf-model="assets/christmas_tree.gltf"
-                    class="clickable"
-                    gesture-handler
-                ></a-entity>
             </a-marker>
             <a-entity camera></a-entity>
         </a-scene>
     </body>
-    <script src="main.js"></script>
+    <script src="main.min.js"></script>
 </html>
