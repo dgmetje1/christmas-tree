@@ -9,11 +9,13 @@
         <script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
     </head>
     <body style="margin: 0px; overflow: hidden">
-        <div id="foundToast">Awesome! You found the ball number <span id="ballNumber"></span></div>
-        <div id="foundedToast">Now you will be able to see the tree. Go try it!</div>
-        <div id="foundTreeToast">Nice job! You completed the game!!!</div>
-        <div id="errorToast">You have to find the balls first to be able to see the tree</div>
-        <div id="bag"><img src="assets/christmas-ball.svg" alt="remaining balls">:<span id="remainingNumber"></span></div>
+        <div id="foundToast">Genial! Has encontrado la bola <span id="ballNumber"></span></div>
+        <div id="foundedToast">Ahora ya puedes montar el árbol. Ve a probarlo!</div>
+        <div id="foundTreeToast">Enhorabuena! Has completado el juego! Nos has salvado la navidad!</div>
+        <div id="errorToast">Tienes que encontrar primero todas las piezas del árbol antes de poder verlo...</div>
+        <div id="bag"><img src="assets/christmas-ball.svg" alt="remaining balls" />:<span id="remainingNumber"></span></div>
+        <button id="reset-bag"><img src="assets/reset.svg" alt="reset button" /></button>
+
         <a-scene
             id="scene"
             embedded
@@ -22,31 +24,31 @@
             gesture-detector
         >
             <a-marker id="anchor1" ball="1" preset="custom" type="pattern" url="assets/patterns/pattern-bolas.patt">
-                <a-sphere src="assets/ball-texture.jpg" rotation="0 0 90" width="1"></a-sphere>
+                <a-entity position="0 0 0" scale="8 8 8" rotation="270 0 0" gltf-model="assets/balls/christmas_ball.gltf"></a-entity>
             </a-marker>
             <a-marker id="anchor2" ball="2" preset="custom" type="pattern" url="assets/patterns/pattern-calcetin.patt">
-                <a-sphere src="assets/ball-texture.jpg" rotation="0 0 90" width="1"></a-sphere>
+                <a-entity position="0 0 0" scale="8 8 8" rotation="270 0 0" gltf-model="assets/balls/christmas_ball2.gltf"></a-entity>
             </a-marker>
             <a-marker id="anchor3" ball="3" preset="custom" type="pattern" url="assets/patterns/pattern-campana.patt">
-                <a-sphere src="assets/ball-texture.jpg" rotation="0 0 90" width="1"></a-sphere>
+                <a-entity position="0 0 0" scale="8 8 8" rotation="270 0 0" gltf-model="assets/balls/christmas_ball3.gltf"></a-entity>
             </a-marker>
             <a-marker id="anchor4" ball="4" preset="custom" type="pattern" url="assets/patterns/pattern-caramelo.patt">
-                <a-sphere src="assets/ball-texture.jpg" rotation="0 0 90" width="1"></a-sphere>
+                <a-entity position="0 0 0" scale="8 8 8" rotation="270 0 0" gltf-model="assets/balls/christmas_ball4.gltf"></a-entity>
             </a-marker>
             <a-marker id="anchor5" ball="5" preset="custom" type="pattern" url="assets/patterns/pattern-estrella.patt">
-                <a-sphere src="assets/ball-texture.jpg" rotation="0 0 90" width="1"></a-sphere>
+                <a-entity position="0 0 0" scale="8 8 8" rotation="270 0 0" gltf-model="assets/balls/christmas_ball5.gltf"></a-entity>
             </a-marker>
             <a-marker id="anchor6" ball="6" preset="custom" type="pattern" url="assets/patterns/pattern-galleta.patt">
-                <a-sphere src="assets/ball-texture.jpg" rotation="0 0 90" width="1"></a-sphere>
+                <a-entity position="0 0 0" scale="8 8 8" rotation="270 0 0" gltf-model="assets/balls/christmas_ball6.gltf"></a-entity>
             </a-marker>
             <a-marker id="anchor7" ball="7" preset="custom" type="pattern" url="assets/patterns/pattern-papanoel.patt">
-                <a-sphere src="assets/ball-texture.jpg" rotation="0 0 90" width="1"></a-sphere>
+                <a-entity position="0 0 0" scale="8 8 8" rotation="270 0 0" gltf-model="assets/balls/christmas_ball7.gltf"></a-entity>
             </a-marker>
             <a-marker id="anchor8" ball="8" preset="custom" type="pattern" url="assets/patterns/pattern-reno.patt">
-                <a-sphere src="assets/ball-texture.jpg" rotation="0 0 90" width="1"></a-sphere>
+                <a-entity position="0 0 0" scale="8 8 8" rotation="270 0 0" gltf-model="assets/balls/christmas_ball8.gltf"></a-entity>
             </a-marker>
             <a-marker id="anchor9" ball="9" preset="custom" type="pattern" url="assets/patterns/pattern-trineo.patt">
-                <a-sphere src="assets/ball-texture.jpg" rotation="0 0 90" width="1"></a-sphere>
+                <a-entity position="0 0 0" scale="8 8 8" rotation="270 0 0" gltf-model="assets/balls/christmas_ball9.gltf"></a-entity>
             </a-marker>
             <a-marker
                 id="tree"

@@ -131,70 +131,86 @@ body {
 
 #foundToast,
 #foundTreeToast,
-#foundedToast {
+#foundedToast,
+#errorToast {
     position: fixed;
-    top: 0;
+    top: -16px;
     left: 0;
-    width: 100vw;
+    width: calc(100vw - 32px);
     height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: lightgreen;
+    color: white;
+    background-color: #007abe;
     transform: translateY(-100%);
     transition: transform ease-in-out 0.5s;
+    margin: 16px;
+    border-radius: 16px;
+    font-size: 20px;
+    padding: 16px;
 }
 
 #foundToast.visible,
 #foundedToast.visible,
-#foundTreeToast.visible {
-    transform: translateY(0%);
-}
-#foundTreeToast {
-    font-size: 20px;
-    font-weight: bold;
-}
-#errorToast {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: lightcoral;
-    color: #fff;
-    padding: 0 8px;
-    transform: translateY(-100%);
-    transition: transform ease-in-out 0.5s;
-}
-
+#foundTreeToast.visible,
 #errorToast.visible {
     transform: translateY(0%);
+    top: 0;
 }
+
+#foundedToast,
+#foundTreeToast {
+    background-color: #0fa551;
+}
+
+#foundTreeToast {
+    font-size: 22px;
+    line-height: 28px;
+    font-weight: bold;
+    height: 125px;
+}
+#errorToast {
+    background-color: #d93e3e;
+}
+
 #foundToast span {
     font-weight: bold;
     margin-left: 4px;
 }
 #bag {
     position: fixed;
-    bottom: 8px;
-    left: 8px;
+    bottom: 16px;
+    left: 16px;
     color: #fff;
     font-size: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
-    text-shadow: 3px 3px rgba(0, 0, 0, 0.7);
+    text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.2);
 }
 #bag img {
     -webkit-filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
     filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
-    width: 25px;
+    width: 40px;
     margin-right: 4px;
 }
 #bag span {
     margin-left: 4px;
     font-weight: bold;
+}
+#reset-bag {
+    border:none;
+    background: transparent;
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    width: 30px;
+    cursor: pointer;
+   z-index:99
+
+}
+#reset-bag img{
+     -webkit-filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
+    filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
 }
